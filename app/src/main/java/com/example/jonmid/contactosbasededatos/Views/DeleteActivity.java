@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.jonmid.contactosbasededatos.ContactsActivity;
 import com.example.jonmid.contactosbasededatos.Helpers.SqliteHelper;
 import com.example.jonmid.contactosbasededatos.R;
+import com.example.jonmid.contactosbasededatos.Utilities.Constants;
 
 public class DeleteActivity extends AppCompatActivity {
 
@@ -48,14 +49,25 @@ public class DeleteActivity extends AppCompatActivity {
 
     public void onClickDeleteContact(View view){
 
+
        SQLiteDatabase db = sqliteHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("DELETE from users WHERE id ='"+Integer.parseInt(textViewid.getText().toString())+"'", null);
-        cursor.close();
+       String [] parametros={textViewid.getText().toString()};
+
+
+        //db.delete(Constants.TABLA_NAME_USERS,Constants.TABLA_FIELD_ID+"=?",parametros);
+
+        Cursor cursor = db.rawQuery("DELETE from users WHERE" + Constants.TABLA_FIELD_ID+Integer.parseInt(textViewid.getText().toString()), null);
+        //cursor.close();
         Toast.makeText(this, "EL CONTACTO SE HA ELIMINADO CON EXITO", Toast.LENGTH_SHORT).show();
         onClickShowPrincipal(view);
 
         Toast.makeText(this, "Id: "+ Integer.parseInt(textViewid.getText().toString()), Toast.LENGTH_SHORT).show();
+        Regresar();
+    }
 
+    public void Regresar(){
+        Intent intent = new Intent(this, ContactsActivity.class);
+        startActivity(intent);
     }
 
 }
