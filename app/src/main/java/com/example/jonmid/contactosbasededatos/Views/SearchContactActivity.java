@@ -31,7 +31,7 @@ public class SearchContactActivity extends AppCompatActivity {
         textViewPhone = (TextView) findViewById(R.id.id_tv_search_phone);
         textViewEmail = (TextView) findViewById(R.id.id_tv_search_email);
 
-        sqliteHelper = new SqliteHelper(this, "db_contacts", null, 1);
+        sqliteHelper = new SqliteHelper(this, "db_users", null, 1);
     }
 
     public void onClickSearchContact(View view){

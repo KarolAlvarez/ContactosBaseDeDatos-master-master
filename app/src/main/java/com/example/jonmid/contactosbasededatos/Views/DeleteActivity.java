@@ -18,7 +18,7 @@ import com.example.jonmid.contactosbasededatos.R;
 import com.example.jonmid.contactosbasededatos.Utilities.Constants;
 
 public class DeleteActivity extends AppCompatActivity {
-    Button buttonEliminar;
+    Button buttonEliminar,buttonCancelar;
     TextView textViewid;
     TextView textViewName;
     TextView textViewPhone;
@@ -31,6 +31,7 @@ public class DeleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete);
         buttonEliminar = (Button) findViewById(R.id.btn_Aceptar);
+        buttonCancelar = (Button) findViewById(R.id.btn_Cancelar);
 
         textViewid = (TextView) findViewById(R.id.delete_id);
         textViewName = (TextView) findViewById(R.id.delete_name);
@@ -42,6 +43,13 @@ public class DeleteActivity extends AppCompatActivity {
         textViewName.setText(getIntent().getExtras().getString("name"));
         textViewPhone.setText(getIntent().getExtras().getString("phone"));
         textViewEmail.setText(getIntent().getExtras().getString("email"));
+
+        buttonCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickShowPrincipal();
+            }
+        });
 
         buttonEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +89,6 @@ public class DeleteActivity extends AppCompatActivity {
     }
 
 
-    public void Regresar() {
-        Intent intent = new Intent(this, ContactsActivity.class);
-        startActivity(intent);
-    }
+
 
 }
