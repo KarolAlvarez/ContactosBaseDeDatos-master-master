@@ -36,7 +36,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         recyclerViewContacts = (RecyclerView) findViewById(R.id.id_rv_contacts);
         textInputEditText = (TextInputEditText) findViewById(R.id.ced1);
-        sqliteHelper = new SqliteHelper(this, "db_contacts", null, 1);
+        sqliteHelper = new SqliteHelper(this, "db_users", null, 1);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -58,9 +58,6 @@ public class ContactsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   // public void onClickbuscar(View view){
-     //   listContactsIndex();
-    //}
 
 
     public void listContacts(){

@@ -31,32 +31,33 @@ public class RegisterContactActivity extends AppCompatActivity {
         textInputEditTextPhone = (TextInputEditText) findViewById(R.id.id_tv_detail_phone);
         textInputEditTextEmail = (TextInputEditText) findViewById(R.id.id_tv_detail_email);
 
-        sqliteHelper = new SqliteHelper(this, "db_contacts", null, 1);
+        sqliteHelper = new SqliteHelper(this, "db_users", null, 1);
     }
 
-    public void onClickCreateUser(View view){
+    public void onClickCreateUser(View view) {
         String stringName = textInputEditTextName.getText().toString();
         String stringPhone = textInputEditTextPhone.getText().toString();
         String stringEmail = textInputEditTextEmail.getText().toString();
 
-        if (TextUtils.isEmpty(stringName)){
+        if (TextUtils.isEmpty(stringName)) {
             Toast.makeText(this, "El campo de nombre esta vacio", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(stringPhone)){
+        } else if (TextUtils.isEmpty(stringPhone)) {
             Toast.makeText(this, "El campo de telefono esta vacio", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(stringEmail)){
+        } else if (TextUtils.isEmpty(stringEmail)) {
             Toast.makeText(this, "El campo de email esta vacio", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             createUser();
         }
     }
 
-    public void createUser(){
+    public void createUser() {
         SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Constants.TABLA_FIELD_NAME, textInputEditTextName.getText().toString());
         values.put(Constants.TABLA_FIELD_PHONE, textInputEditTextPhone.getText().toString());
         values.put(Constants.TABLA_FIELD_EMAIL, textInputEditTextEmail.getText().toString());
+
 
         Long idResult = db.insert(Constants.TABLA_NAME_USERS, Constants.TABLA_FIELD_ID, values);
 
@@ -68,7 +69,7 @@ public class RegisterContactActivity extends AppCompatActivity {
         Regresar();
     }
 
-    public void Regresar(){
+    public void Regresar() {
         Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }

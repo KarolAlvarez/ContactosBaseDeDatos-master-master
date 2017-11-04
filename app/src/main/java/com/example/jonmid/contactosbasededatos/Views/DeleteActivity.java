@@ -5,17 +5,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jonmid.contactosbasededatos.ContactsActivity;
 import com.example.jonmid.contactosbasededatos.Helpers.SqliteHelper;
+import com.example.jonmid.contactosbasededatos.Models.Contact;
 import com.example.jonmid.contactosbasededatos.R;
 import com.example.jonmid.contactosbasededatos.Utilities.Constants;
 
 public class DeleteActivity extends AppCompatActivity {
-
+    Button buttonEliminar;
     TextView textViewid;
     TextView textViewName;
     TextView textViewPhone;
@@ -27,6 +30,7 @@ public class DeleteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete);
+        buttonEliminar = (Button) findViewById(R.id.btn_Aceptar);
 
         textViewid = (TextView) findViewById(R.id.delete_id);
         textViewName = (TextView) findViewById(R.id.delete_name);
@@ -39,33 +43,45 @@ public class DeleteActivity extends AppCompatActivity {
         textViewPhone.setText(getIntent().getExtras().getString("phone"));
         textViewEmail.setText(getIntent().getExtras().getString("email"));
 
+        buttonEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteContact();
+            }
+        });
+
     }
 
-    public void onClickShowPrincipal(View view){
+    public void onClickShowPrincipal() {
 
         Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 
-    public void onClickDeleteContact(View view){
+    public void deleteContact() {
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
+        int id = Integer.parseInt(textViewid.getText().toString());
 
 
-       SQLiteDatabase db = sqliteHelper.getReadableDatabase();
-       String [] parametros={textViewid.getText().toString()};
+       Integer datoEliminado=db.delete(Constants.TABLA_NAME_USERS, Constants.TABLA_FIELD_ID + "=" + id, null);
+        db.close();
+
+       if (datoEliminado !=0){
+           Toast.makeText(this,"El usuario: "+textViewName.getText()+" se elimino con exito",Toast.LENGTH_SHORT).show();
+
+           onClickShowPrincipal();
+
+       }else {
+           Toast.makeText(this,"El usuario: "+textViewName.getText()+" no existe en la base de datos",Toast.LENGTH_SHORT).show();
+           onClickShowPrincipal();
+       }
 
 
-        //db.delete(Constants.TABLA_NAME_USERS,Constants.TABLA_FIELD_ID+"=?",parametros);
 
-        Cursor cursor = db.rawQuery("DELETE from users WHERE" + Constants.TABLA_FIELD_ID+Integer.parseInt(textViewid.getText().toString()), null);
-        //cursor.close();
-        Toast.makeText(this, "EL CONTACTO SE HA ELIMINADO CON EXITO", Toast.LENGTH_SHORT).show();
-        onClickShowPrincipal(view);
-
-        Toast.makeText(this, "Id: "+ Integer.parseInt(textViewid.getText().toString()), Toast.LENGTH_SHORT).show();
-        Regresar();
     }
 
-    public void Regresar(){
+
+    public void Regresar() {
         Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
