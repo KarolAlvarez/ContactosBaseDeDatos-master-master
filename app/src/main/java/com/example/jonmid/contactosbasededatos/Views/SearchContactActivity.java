@@ -80,11 +80,21 @@ public class SearchContactActivity extends AppCompatActivity {
 
         SQLiteDatabase bdc = sqliteHelper.getReadableDatabase();
 
-        bdc.execSQL("UPDATE users SET name= '"+edtxtName.getText().toString()+"', phone= "+Integer.parseInt(edtxtphone.getText().toString())+", email = '"+edtxtEmail.getText().toString()+"' WHERE id = "+id);
+        bdc.execSQL("UPDATE users SET name= '" + edtxtName.getText().toString() +
+                "', phone= " + Integer.parseInt(edtxtphone.getText().toString()) +
+                ", email = '" + edtxtEmail.getText().toString() +
+                "' WHERE id = " + id);
 
+        Toast.makeText(this, "Todos los datos fueron actualizados con exito",
+                Toast.LENGTH_LONG);
+
+        goBack();
+
+    }
+
+    public void goBack() {
         Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
-
     }
 
     int id;
