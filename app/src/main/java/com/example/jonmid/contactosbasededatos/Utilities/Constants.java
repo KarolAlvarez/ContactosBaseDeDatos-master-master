@@ -16,4 +16,19 @@ public class Constants {
                     TABLA_FIELD_NAME+" TEXT, "+
                     TABLA_FIELD_PHONE+" TEXT, "+
                     TABLA_FIELD_EMAIL+" TEXT)";
+
+
+
+    public static final String TABLA_NAME_COMMENTS = "comments";
+    public static final String TABLA_FIELD_IDC = "id";
+    public static final String TABLA_FIELD_TITTLE = "title";
+    public static final String TABLA_FIELD_COMMENT = "comment";
+    public static final String TABLA_FIELD_IDUSER = "id_user";
+    public static final String CREATE_TABLE_COMMENTS =
+            "CREATE TABLE "+ TABLA_NAME_COMMENTS+" ("+
+                    TABLA_FIELD_IDC+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    TABLA_FIELD_TITTLE+" TEXT, "+
+                    TABLA_FIELD_COMMENT+" TEXT, "+
+                    TABLA_FIELD_IDUSER+" INTEGER)";
+
 }

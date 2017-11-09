@@ -65,7 +65,8 @@ public class RegisterContactActivity extends AppCompatActivity {
         textInputEditTextPhone.setText("");
         textInputEditTextEmail.setText("");
 
-        Toast.makeText(this, "El contacto se registro correctamente", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "El contacto se registro exitosamente", +
+                Toast.LENGTH_SHORT).show();
         Regresar();
     }
 

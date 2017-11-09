@@ -19,6 +19,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Constants.CREATE_TABLE_USERS);
+        db.execSQL(Constants.CREATE_TABLE_COMMENTS);
     }
 
     @Override
